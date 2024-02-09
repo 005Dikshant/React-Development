@@ -47,7 +47,7 @@ function Card() {
     <div className="card">
       <Avatar photo="dev.jpg" name="dev photo" />
       <Description />
-      <div className="skill">
+      <div className="skill-list">
         {skillsList.map(({ skill, color, level }) => (
           <Skills
             emoji={
@@ -91,7 +91,7 @@ function Description() {
 
 function Skills({ skill, color, emoji }) {
   return (
-    <button className="skill-list" style={{ backgroundColor: color }}>
+    <button className="skill" style={{ backgroundColor: color }}>
       {skill} {emoji}
     </button>
   );
