@@ -9,21 +9,61 @@ root.render(
   </React.StrictMode>
 );
 
+const skillsList = [
+  {
+    skill: "HTML+CSS",
+    level: "advanced",
+    color: "#2662EA",
+  },
+  {
+    skill: "Javascript",
+    level: "advanced",
+    color: "#EFD81D",
+  },
+  {
+    skill: "Web Design",
+    level: "advanced",
+    color: "#C3DCAF",
+  },
+  {
+    skill: "Git and Github",
+    level: "intermediate",
+    color: "#E84F33",
+  },
+  {
+    skill: "React",
+    level: "advanced",
+    color: "#60DAFB",
+  },
+  {
+    skill: "Svelte",
+    level: "beginner",
+    color: "#FF3B00",
+  },
+];
+
 function Card() {
   return (
     <div className="card">
       <Avatar photo="dev.jpg" name="dev photo" />
       <Description />
-      <Skills
-        skillList={[
-          ["HTML+CSS 💪", "blue"],
-          ["Javascript 💪", "yellow"],
-          ["Web Design 💪", "lightgreen"],
-          ["Git and Github 👍", "red"],
-          ["React 💪", "light blue"],
-          ["Svelte 👶", "red"],
-        ]}
-      />
+      <div className="skill">
+        {skillsList.map(({ skill, color, level }) => (
+          <Skills
+            emoji={
+              level === "advanced"
+                ? "💪"
+                : skill === "intermediate"
+                ? "👍"
+                : "👶"
+            }
+            skill={skill}
+            level={level}
+            color={color}
+            key={skill}
+          />
+        ))}
+      </div>
     </div>
   );
 }
@@ -49,20 +89,10 @@ function Description() {
   );
 }
 
-function Skills(props) {
+function Skills({ skill, color, emoji }) {
   return (
-    <div className="skill">
-      {props.skillList.map((data) => {
-        return (
-          <button
-            key={data[0]}
-            className="skill-list"
-            style={{ backgroundColor: data[1] }}
-          >
-            {data[0]}
-          </button>
-        );
-      })}
-    </div>
+    <button className="skill-list" style={{ backgroundColor: color }}>
+      {skill} {emoji}
+    </button>
   );
 }
