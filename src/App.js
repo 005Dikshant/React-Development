@@ -19,7 +19,7 @@ export default function App() {
   }
 
   return (
-    <div>
+    <>
       <button class="close" onClick={() => setIsOpen(!isOpen)}>
         &times;
       </button>
@@ -57,6 +57,6 @@ export default function App() {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }
