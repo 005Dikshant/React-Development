@@ -14,13 +14,23 @@ function Counter() {
   return (
     <div>
       <div>
-        <button onClick={() => setState((s) => s - 1)}>-</button>
-        <span>State: {state}</span>
-        <button onClick={() => setState((s) => s + 1)}>+</button>
+        <input
+          type="range"
+          value={state}
+          min="0"
+          max="10"
+          onChange={(e) => {
+            setState(Number(e.target.value));
+          }}
+        />
+        <span>Step: {state}</span>
       </div>
       <div>
         <button onClick={() => setCount((c) => c - state)}>-</button>
-        <span>Count: {count}</span>
+        <input
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value))}
+        />
         <button onClick={() => setCount((c) => c + state)}>+</button>
       </div>
 
@@ -34,6 +44,17 @@ function Counter() {
         </span>
         {date.toDateString()}
       </p>
+
+      {count !== 0 || state !== 1 ? (
+        <button
+          onClick={() => {
+            setCount(0);
+            setState(1);
+          }}
+        >
+          Reset
+        </button>
+      ) : null}
     </div>
   );
 }
