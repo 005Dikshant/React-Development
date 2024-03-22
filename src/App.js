@@ -8,7 +8,6 @@ export default function App() {
   }
 
   function handleDeleteItem(id) {
-    console.log(id);
     setItems((items) => items.filter((item) => item.id !== id));
   }
 
@@ -29,7 +28,7 @@ export default function App() {
         onDeleteItem={handleDeleteItem}
         onUpdateItem={handleUpdateItem}
       />
-      <Stats />
+      <Stats items={items} />
     </div>
   );
 }
@@ -56,8 +55,6 @@ function Form({ onAddItems }) {
       packed: false,
     };
     onAddItems(newItem);
-
-    console.log(newItem);
     setDescription("");
     setQuantity(1);
   }
@@ -118,11 +115,26 @@ function Item({ item, onDeleteItem, onUpdateItem }) {
   );
 }
 
-function Stats() {
+function Stats({ items }) {
+  if (!items.length) {
+    return (
+      <p className="stats">
+        <em>Start adding some items to your packaging list 🚀 </em>
+      </p>
+    );
+  }
+
+  const numItems = items.length;
+  const packedItems = items.filter((item) => item.packed).length;
+  const percentage = Math.round((packedItems / numItems) * 100);
   return (
     <footer className="stats">
       <em>
-        💼 You have X items on your list, and you have already packed X (X%)
+        {percentage === 100
+          ? "You got everything! Ready to go ✈️"
+          : `💼 You have
+        ${numItems} items on your list, and you have already packed ${packedItems}
+        (${percentage}%)`}
       </em>
     </footer>
   );
