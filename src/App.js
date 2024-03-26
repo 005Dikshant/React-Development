@@ -7,7 +7,18 @@ const messages = [
 ];
 
 export default function App() {
-  return <Step />;
+  return (
+    <>
+      <Step />
+      <StepMessage step={1}>
+        <p>Welcome to world of narnia</p>
+      </StepMessage>
+
+      <StepMessage step={2}>
+        <p>Please stop and watch anime</p>
+      </StepMessage>
+    </>
+  );
 }
 
 function Step() {
@@ -35,9 +46,24 @@ function Step() {
             <div className={step >= 3 ? "active" : ""}>3</div>
           </div>
 
-          <p className="message">
+          {/* <p className="message">
             Step {step} : {messages[step - 1]}
-          </p>
+          </p> */}
+
+          <StepMessage step={step}>
+            {messages[step - 1]}
+            <div className="buttons">
+              <Button
+                textColor="blue"
+                bgColor="#795"
+                text={messages[step - 1]}
+                onClick={() => alert(`Learn how to ${messages[step - 1]}`)}
+                emoji="😎"
+              >
+                Previous<span>👈</span>
+              </Button>
+            </div>
+          </StepMessage>
 
           <div className="buttons">
             <Button
@@ -63,6 +89,16 @@ function Step() {
         </div>
       )}
     </>
+  );
+}
+
+function StepMessage({ step, children }) {
+  return (
+    <div className="message">
+      <h3>
+        Step {step} : {children}
+      </h3>
+    </div>
   );
 }
 
