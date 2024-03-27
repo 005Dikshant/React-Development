@@ -28,12 +28,20 @@ export default function App() {
       <Tip handleTip={handleMyFriendTip} currentTip={friendTip}>
         <span>How did your friend like the service?</span>
       </Tip>
-      <Output myTip={myTip} friendTip={friendTip} custBill={custBill}></Output>
-      <Reset
-        handleMyTip={handleMyTip}
-        handleMyFriendTip={handleMyFriendTip}
-        handleCustomerBill={handleCustomerBill}
-      />
+      {custBill > 0 && (
+        <>
+          <Output
+            myTip={myTip}
+            friendTip={friendTip}
+            custBill={custBill}
+          ></Output>
+          <Reset
+            handleMyTip={handleMyTip}
+            handleMyFriendTip={handleMyFriendTip}
+            handleCustomerBill={handleCustomerBill}
+          />
+        </>
+      )}
     </>
   );
 }
