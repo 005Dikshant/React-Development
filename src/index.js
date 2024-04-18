@@ -4,6 +4,15 @@ import ReactDOM from "react-dom/client";
 // import App from "./App";
 import StarRating from "./StarRating";
 
+function Test() {
+  return (
+    <>
+      <StarRating maxRating={8} color="blue" size={32} />
+      <p>This movie hax X Rating</p>
+    </>
+  );
+}
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -13,5 +22,6 @@ root.render(
       messages={["Terrible", "Bad", "OK", "Good", "Amazing"]}
     />
     <StarRating maxRating={10} color="red" size={20} defaultRating={6} />
+    <Test />
   </React.StrictMode>
 );
