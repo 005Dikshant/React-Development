@@ -3,12 +3,19 @@ import ReactDOM from "react-dom/client";
 // import "./index.css";
 // import App from "./App";
 import StarRating from "./StarRating";
+import { useState } from "react";
 
 function Test() {
+  const [movieRating, setMovieRating] = useState(0);
   return (
     <>
-      <StarRating maxRating={8} color="blue" size={32} />
-      <p>This movie hax X Rating</p>
+      <StarRating
+        maxRating={8}
+        color="blue"
+        size={32}
+        onSetRating={setMovieRating}
+      />
+      <p>This movie has {movieRating} Rating</p>
     </>
   );
 }
