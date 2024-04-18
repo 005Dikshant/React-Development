@@ -16,7 +16,7 @@ export default function StarRating({
   size = 48,
   messages = [],
   defaultRating = 0,
-  onSetRating,
+  onSetRating = () => {},
 }) {
   const textStyle = {
     lineHeight: "1",
