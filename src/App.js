@@ -48,14 +48,22 @@ const tempWatchedData = [
 ];
 
 const key = "29caac08";
+const query = "american pie";
 export default function App() {
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=${key}&s=american pie`)
-      .then((res) => res.json())
-      .then((data) => setMovies(data.Search));
+    async function fetchMovies() {
+      const res = await fetch(
+        `http://www.omdbapi.com/?apikey=${key}&s=${query}`
+      );
+      const data = await res.json();
+      setMovies(data.Search);
+      console.log(data.Search);
+    }
+
+    fetchMovies();
   }, []);
 
   return (
