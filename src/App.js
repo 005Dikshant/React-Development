@@ -239,6 +239,11 @@ function MovieDetails({ selectedId, onCloseMovie, onWatchedMovie, watched }) {
       return;
     }
     document.title = `Movie - ${title}`;
+
+    return () => {
+      document.title = "Movies Apps";
+      console.log("hello");
+    };
   }, [title]);
 
   return (
