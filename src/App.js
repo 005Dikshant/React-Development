@@ -9,6 +9,7 @@ export default function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  const controller = new AbortController();
 
   function handleSelectedMovie(id) {
     setSelectedId((selectedId) => (selectedId === id ? null : id));
@@ -24,26 +25,28 @@ export default function App() {
   function handleDeleteWatchedMovie(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
-
   useEffect(() => {
     async function fetchMovies() {
       try {
         setIsLoading(true);
-        setError("");
+        // setError("");
         const res = await fetch(
-          `http://www.omdbapi.com/?apikey=${key}&s=${query}`
+          `http://www.omdbapi.com/?apikey=${key}&s=${query}`,
+          { signal: controller.signal }
         );
 
         if (!res.ok)
           throw new Error("Something went wrong with fetching the movies");
 
         const data = await res.json();
-
         if (data.Response === "False") throw new Error("No movie found :/");
 
         setMovies(data.Search);
+        setError("");
       } catch (err) {
-        setError(err.message);
+        if (err.name !== "AbortError") {
+          setError(err.message);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -56,6 +59,9 @@ export default function App() {
     }
 
     fetchMovies();
+    return () => {
+      controller.abort();
+    };
   }, [query]);
 
   return (
@@ -242,7 +248,6 @@ function MovieDetails({ selectedId, onCloseMovie, onWatchedMovie, watched }) {
 
     return () => {
       document.title = "Movies Apps";
-      console.log("hello");
     };
   }, [title]);
 
