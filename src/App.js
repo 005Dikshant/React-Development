@@ -3,7 +3,7 @@ import StarRating from "./StarRating";
 
 const key = "29caac08";
 export default function App() {
-  const [query, setQuery] = useState("American pie");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -25,6 +25,7 @@ export default function App() {
   function handleDeleteWatchedMovie(id) {
     setWatched((watched) => watched.filter((movie) => movie.imdbID !== id));
   }
+
   useEffect(() => {
     async function fetchMovies() {
       try {
@@ -58,6 +59,7 @@ export default function App() {
       return;
     }
 
+    handleCloseMovie();
     fetchMovies();
     return () => {
       controller.abort();
@@ -250,6 +252,20 @@ function MovieDetails({ selectedId, onCloseMovie, onWatchedMovie, watched }) {
       document.title = "Movies Apps";
     };
   }, [title]);
+
+  useEffect(() => {
+    const callback = (e) => {
+      if (e.code === "Escape") {
+        onCloseMovie();
+        console.log("Closing");
+      }
+    };
+    document.addEventListener("keydown", callback);
+
+    return () => {
+      document.removeEventListener("keydown", callback);
+    };
+  }, [onCloseMovie]);
 
   return (
     <div className="details">
