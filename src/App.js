@@ -229,6 +229,16 @@ function MovieDetails({ selectedId, onCloseMovie, onWatchedMovie, watched }) {
     Genre: genre,
   } = movie;
 
+  /* eslint-disable */
+  // Early returns are not allowed in react, if the number of hooks are changed
+  //   if (imdbRating > 1.8) {
+  //     return <p>Works!</p>;
+  //   }
+
+  if (imdbRating > 1.8) {
+    const [bestRating, setBestRating] = useState(true);
+  }
+
   useEffect(() => {
     setIsLoading(true);
     async function getMovieDetails() {
