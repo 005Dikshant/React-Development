@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StarRating from "./StarRating";
 
 const key = "29caac08";
@@ -149,12 +149,33 @@ function Logo() {
 }
 
 function Search({ query, setQuery }) {
+  const inputEle = useRef(null);
+
+  useEffect(() => {
+    function callback(e) {
+      if (document.activeElement === inputEle.current) {
+        return;
+      }
+
+      if (e.code === "Enter") {
+        setQuery("");
+        inputEle.current.focus();
+      }
+    }
+
+    document.addEventListener("keydown", callback);
+    return () => {
+      document.removeEventListener("keydown", callback);
+    };
+  }, [setQuery]);
+
   return (
     <input
       className="search"
       type="text"
       placeholder="Search movies..."
       value={query}
+      ref={inputEle}
       onChange={(e) => setQuery(e.target.value)}
     />
   );
