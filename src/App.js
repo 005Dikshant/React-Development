@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function convertToFlag(countryCode) {
   const codePoints = countryCode
@@ -37,6 +37,17 @@ export default function App() {
   const [placeName, setPlaceName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [weather, setWeather] = useState(null);
+
+  useEffect(() => {
+    function callback(e) {
+      if (e.code === "Enter") {
+        getWeather();
+      }
+    }
+
+    document.addEventListener("keydown", callback);
+    return () => document.removeEventListener("keydown", callback);
+  }, [getWeather]);
 
   async function getWeather() {
     if (location === "") {
