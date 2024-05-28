@@ -33,21 +33,22 @@ function getWeatherIcon(wmoCode) {
 }
 
 export default function App() {
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState(() => {
+    const storedValue = localStorage.getItem("location");
+    return storedValue ? storedValue : "";
+  });
+
   const [placeName, setPlaceName] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
-    function callback(e) {
-      if (e.code === "Enter") {
-        getWeather();
-      }
+    if (location.length <= 2) {
+      return setWeather(null);
     }
-
-    document.addEventListener("keydown", callback);
-    return () => document.removeEventListener("keydown", callback);
-  }, [getWeather]);
+    localStorage.setItem("location", location);
+    getWeather();
+  }, [location]);
 
   async function getWeather() {
     if (location === "") {
@@ -91,7 +92,6 @@ export default function App() {
         value={location}
         onChange={(e) => setLocation(e.target.value)}
       ></input>
-      <button onClick={getWeather}>Get Weather</button>
 
       {isLoading && <p>Loading...</p>}
       {weather && <Weather weather={weather} placeName={placeName} />}
