@@ -7,7 +7,6 @@ export default function Progress({
   totalPoints,
   answer,
 }) {
-  console.log("hello");
   return (
     <div>
       <header className="progress">
