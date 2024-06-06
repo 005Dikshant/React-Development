@@ -1,7 +1,17 @@
 import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Homepage from "./pages/Homepage";
+import Product from "./pages/Product";
+import Pricing from "./pages/Pricing";
 
 export default function App() {
-  const x = 23;
-
-  return <div>worldwise</div>;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="product" element={<Product />} />
+        <Route path="pricing" element={<Pricing />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }

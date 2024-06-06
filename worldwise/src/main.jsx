@@ -7,3 +7,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <App />
   </React.StrictMode>
 );
+//"vite-plugin-eslint": "^1.8.1"
+//"eslint-config-react-app": "^7.0.1",
