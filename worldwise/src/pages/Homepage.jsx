@@ -8,7 +8,7 @@ export default function Homepage() {
     <div>
       <PageNav />
       <AppNav />
-      <h1>World Wise</h1>
+      <h1 className="test">World Wise</h1>
 
       <Link to="app">Go to app</Link>
     </div>
