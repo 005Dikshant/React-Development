@@ -12,7 +12,7 @@ const formatDate = (date) =>
 function City() {
   const x = useParams();
   console.log(x);
-  return <h1>City</h1>;
+  return <h1>city just for useParams</h1>;
   // TEMP DATA
   // const currentCity = {
   //   cityName: "Lisbon",
