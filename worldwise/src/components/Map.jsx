@@ -11,9 +11,11 @@ import { useEffect, useState } from "react";
 
 import styles from "./Map.module.css";
 import { useCities } from "../contexts/CityContext";
+import { useGeolocation } from "../hooks/useGeoLocation";
+import Button from "./Button";
 
 function Map() {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const mapLat = searchParams.get("lat");
   const mapLng = searchParams.get("lng");
 
@@ -21,14 +23,37 @@ function Map() {
 
   const { cities } = useCities();
 
+  const {
+    position: isLoadingPosition,
+    isLoading: geolocationPosition,
+    getPosition,
+  } = useGeolocation();
+
   useEffect(() => {
     if (mapLat && mapLng) {
       setMapPosition([mapLat, mapLng]);
     }
   }, [mapLat, mapLng]);
 
+  // if (isLoadingPosition) {
+  //   console.log("this is if block causes too many re-renders so use-effect");
+  //   console.log(isLoadingPosition);
+  //   setMapPosition([isLoadingPosition.lat, isLoadingPosition.lng]);
+  // }
+  useEffect(() => {
+    if (isLoadingPosition)
+      setMapPosition([isLoadingPosition.lat, isLoadingPosition.lng]);
+  }, [isLoadingPosition]);
+
+  console.log(isLoadingPosition);
+
   return (
     <div className={styles.mapContainer}>
+      {!isLoadingPosition && (
+        <Button type="position" onClick={getPosition}>
+          {geolocationPosition ? "LOADING..." : "USE YOUR POSITION"}
+        </Button>
+      )}
       <MapContainer
         center={mapPosition}
         zoom={6}
@@ -67,7 +92,7 @@ function DetectClick() {
 
   useMapEvent({
     click: (e) => {
-      navigate("form");
+      navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`);
     },
   });
 }
