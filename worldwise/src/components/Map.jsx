@@ -12,12 +12,11 @@ import { useEffect, useState } from "react";
 import styles from "./Map.module.css";
 import { useCities } from "../contexts/CityContext";
 import { useGeolocation } from "../hooks/useGeoLocation";
+import { useUrlPosition } from "../hooks/useUrlPosition";
 import Button from "./Button";
 
 function Map() {
-  const [searchParams] = useSearchParams();
-  const mapLat = searchParams.get("lat");
-  const mapLng = searchParams.get("lng");
+  const [mapLat, mapLng] = useUrlPosition();
 
   const [mapPosition, setMapPosition] = useState([40, 0]);
 
@@ -44,8 +43,6 @@ function Map() {
     if (isLoadingPosition)
       setMapPosition([isLoadingPosition.lat, isLoadingPosition.lng]);
   }, [isLoadingPosition]);
-
-  console.log(isLoadingPosition);
 
   return (
     <div className={styles.mapContainer}>
