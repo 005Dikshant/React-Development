@@ -17,6 +17,27 @@ function CityProvider({ children }) {
     setIsLoading(false);
   }
 
+  async function createCity(newCity) {
+    try {
+      setIsLoading(true);
+      const res = await fetch(`${BASE_URL}/cities`, {
+        method: "POST",
+        body: JSON.stringify(newCity),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const data = await res.json();
+      setCities((cities) => [...cities, data]);
+    } catch (e) {
+      console.log(e.message);
+      alert(`Error while inserting the data ${e.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  }
+
   useEffect(() => {
     async function fetchCities() {
       try {
@@ -43,6 +64,7 @@ function CityProvider({ children }) {
         isLoading,
         getCity,
         currentCity,
+        createCity,
       }}
     >
       {children}

@@ -42,3 +42,11 @@
   font-family: inherit;
   font-size: 1.2rem;
 }
+
+.customCalendar {
+  transform: scale(1.5); /* Zoom in the entire calendar */
+  transform-origin: top left;
+  background-color: #215005;
+  /* font-size: 1.5em;
+  padding: 0.5em; */
+}

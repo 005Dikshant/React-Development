@@ -1,6 +1,9 @@
 // "https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=0&longitude=0"
 
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 import styles from "./Form.module.css";
 import Button from "./Button";
@@ -8,6 +11,7 @@ import BackButton from "./BackButton";
 import Spinner from "./Spinner";
 import Message from "./Message";
 import { useUrlPosition } from "../hooks/useUrlPosition";
+import { useCities } from "../contexts/CityContext";
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode
@@ -28,9 +32,15 @@ function Form() {
   const [geocodingError, setGeocodingError] = useState("");
 
   const [lat, lng] = useUrlPosition();
+  const { createCity, isLoading } = useCities();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchCityData() {
+      if (!lat && !lng) {
+        return;
+      }
+
       try {
         setGeocodingError(null);
         setIsLoadingGeocoding(true);
@@ -64,8 +74,34 @@ function Form() {
     return <Message message={geocodingError} />;
   }
 
+  if (!lat && !lng) {
+    return <Message message={"Start by clicking somewhere on the map"} />;
+  }
+
+  async function handleFormSubmit(e) {
+    e.preventDefault();
+
+    if (!cityName || !date) return;
+
+    const newCity = {
+      cityName,
+      country,
+      emoji,
+      date,
+      notes,
+      position: {
+        lat: lat,
+        lng: lng,
+      },
+    };
+    await createCity(newCity);
+    navigate("/app/cities");
+  }
   return (
-    <form className={styles.form}>
+    <form
+      className={`${styles.form} ${isLoading ? styles.loading : ""}`}
+      onSubmit={handleFormSubmit}
+    >
       <div className={styles.row}>
         <label htmlFor="cityName">City name</label>
         <input
@@ -76,12 +112,16 @@ function Form() {
         <span className={styles.flag}>{emoji}</span>
       </div>
 
-      <div className={styles.row}>
+      <div className={`${styles.row}`}>
         <label htmlFor="date">When did you go to {cityName}?</label>
-        <input
+        <DatePicker
           id="date"
-          onChange={(e) => setDate(e.target.value)}
-          value={date}
+          selected={date}
+          onChange={(date) => setDate(date)}
+          showIcon
+          toggleCalendarOnIconClick
+          closeOnScroll={true}
+          calendarClassName={`${styles.customCalendar}`}
         />
       </div>
 
