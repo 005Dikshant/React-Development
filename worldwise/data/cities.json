@@ -37,64 +37,16 @@
       "id": 98443197
     },
     {
-      "cityName": "Castilfale",
-      "country": "Spain",
-      "emoji": "🇪🇸",
-      "date": "2024-06-25T15:50:05.332Z",
-      "notes": "",
+      "cityName": "Santa Caterina Villarmosa",
+      "country": "Italy",
+      "emoji": "🇮🇹",
+      "date": "2024-06-26T18:06:01.073Z",
+      "notes": "Sex and best porn",
       "position": {
-        "lat": "42.23050816429727",
-        "lng": "-5.40429202737885"
+        "lat": "37.58209903102591",
+        "lng": "14.109357877309254"
       },
       "id": 98443198
-    },
-    {
-      "cityName": "Nerac",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2024-06-25T15:50:22.383Z",
-      "notes": "",
-      "position": {
-        "lat": "44.10550481226475",
-        "lng": "0.33471996330704196"
-      },
-      "id": 98443199
-    },
-    {
-      "cityName": "Antigny",
-      "country": "France",
-      "emoji": "🇫🇷",
-      "date": "2024-06-25T15:58:55.095Z",
-      "notes": "",
-      "position": {
-        "lat": "46.63469339591782",
-        "lng": "-0.7857218482659879"
-      },
-      "id": 98443200
-    },
-    {
-      "cityName": "Grez-Doiceau",
-      "country": "Belgium",
-      "emoji": "🇧🇪",
-      "date": "2024-06-25T16:03:42.022Z",
-      "notes": "",
-      "position": {
-        "lat": "50.75172487243334",
-        "lng": "4.728596584599201"
-      },
-      "id": 98443201
-    },
-    {
-      "cityName": "Svedala",
-      "country": "Sweden",
-      "emoji": "🇸🇪",
-      "date": "2024-06-25T16:04:50.342Z",
-      "notes": "",
-      "position": {
-        "lat": "55.5163972437992",
-        "lng": "13.386445044371682"
-      },
-      "id": 98443202
     }
   ]
 }
