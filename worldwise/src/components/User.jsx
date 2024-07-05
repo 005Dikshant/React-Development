@@ -6,12 +6,6 @@ function User() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  console.log(user);
-  if (user === null) {
-    navigate("/");
-    return;
-  }
-
   function handleLogout() {
     logout();
     navigate("/");
