@@ -1,11 +1,9 @@
 import React from "react";
+import { useQuiz } from "../contexts/QuizContext";
 
-export default function NextQuestion({
-  dispatch,
-  answer,
-  index,
-  numOfQuestions,
-}) {
+export default function NextQuestion() {
+  const { dispatch, answer, index, numOfQuestions } = useQuiz();
+
   if (answer === null) {
     return;
   }
