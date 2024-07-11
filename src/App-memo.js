@@ -36,9 +36,9 @@ function App() {
   const archiveState = useMemo(() => {
     return {
       show: false,
-      title: "Post archive in addition to main Posts",
+      title: `Post archive in addition to main ${posts.length} Posts`,
     };
-  }, []);
+  }, [posts.length]);
 
   // Whenever `isFakeDark` changes, we toggle the `fake-dark-mode` class on the HTML element (see in "Elements" dev tool).
   useEffect(
