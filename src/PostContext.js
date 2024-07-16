@@ -36,17 +36,17 @@ function PostProvider({ children }) {
     setPosts([]);
   }
 
+  const val = {
+    posts: searchedPosts,
+    onClearPosts: handleClearPosts,
+    searchQuery,
+    setSearchQuery,
+    onAddPost: handleAddPost,
+  };
+
   // second step of setting up the values
   return (
-    <PostContext.Provider
-      value={{
-        posts: searchedPosts,
-        onClearPosts: handleClearPosts,
-        searchQuery,
-        setSearchQuery,
-        onAddPost: handleAddPost,
-      }}
-    >
+    <PostContext.Provider value={val}>
       <section>{children}</section>
     </PostContext.Provider>
   );
