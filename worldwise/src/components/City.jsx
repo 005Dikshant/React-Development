@@ -20,7 +20,7 @@ function City() {
 
   useEffect(() => {
     getCity(id); // child to parent communication
-  }, [id]);
+  }, [id, getCity]);
 
   if (isLoading) {
     return <Spinner />;
