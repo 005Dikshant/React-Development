@@ -1,13 +1,31 @@
 import { useEffect, useState } from "react";
 import Calculator from "./Calculator";
 import ToggleSounds from "./ToggleSounds";
-import Time from "./Time";
 
 function App() {
+  const [time, setTime] = useState(formatTime(new Date()));
   const [allowSound, setAllowSound] = useState(true);
 
   // Will be be AM or PM
   const partOfDay = time.slice(-2);
+
+  function formatTime(date) {
+    return new Intl.DateTimeFormat("en", {
+      month: "short",
+      year: "2-digit",
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit",
+    }).format(date);
+  }
+
+  useEffect(function () {
+    const id = setInterval(function () {
+      setTime(formatTime(new Date()));
+    }, 1000);
+
+    return () => clearInterval(id);
+  }, []);
 
   const workouts = [
     {
@@ -35,8 +53,7 @@ function App() {
   return (
     <main>
       <h1>Workout timer</h1>
-      <Time />
-
+      <time>For your workout on {time}</time>
       <ToggleSounds allowSound={allowSound} setAllowSound={setAllowSound} />
       <Calculator workouts={workouts} allowSound={allowSound} />
     </main>
