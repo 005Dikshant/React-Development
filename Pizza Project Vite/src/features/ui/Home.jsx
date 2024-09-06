@@ -1,7 +1,7 @@
 function Home() {
   return (
     <div>
-      <h1 className="text-center text-xl font-semibold text-stone-700">
+      <h1 className="font-semibol text-center text-xl">
         The best pizza.
         <br />
         <span className="text-yellow-500">
