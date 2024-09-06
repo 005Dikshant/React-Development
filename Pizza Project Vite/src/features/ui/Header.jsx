@@ -3,9 +3,10 @@ import SearchOrder from "../order/SearchOrder";
 
 function Header() {
   return (
-    <div>
+    <div className="bg-yellow-500">
       <Link to="/">FAST REACT PIZZA CO.</Link>
       <SearchOrder />
+      <p>Dikshant</p>
     </div>
   );
 }
