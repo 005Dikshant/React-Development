@@ -1,4 +1,4 @@
-import CreateUser from '../user/CreateUser';
+import CreateUser from "../user/CreateUser";
 
 function Home() {
   return (
@@ -6,7 +6,7 @@ function Home() {
       <h1 className="font-semibol mb-8 text-xl md:text-3xl">
         The best pizza.
         <br />
-        <span className="text-yellow-500">
+        <span className="text-yellow-400">
           Straight out of the oven, straight to you.
         </span>
       </h1>
